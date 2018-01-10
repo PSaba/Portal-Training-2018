@@ -1,0 +1,66 @@
+h1{
+	color: lavender;
+}
+h2{
+	color: lavender;
+	font-size: 50;
+}
+p{
+	background-color: lavender;
+	color: black;
+	text-align: left;
+	margin: 10;
+}
+body{
+	margin-left:100; 
+	border-style: dashed;
+	border-radius: 20;
+	border-bottom: 100;
+	border-width: thin;
+	text-align: center;
+	border-color: lavender;
+	background-color: black;
+	color: lavender;
+	margin-right: 100;
+	margin-right: 30;
+}
+#nav{
+	background-color: lavender;
+	color: black;
+	margin-top: 80;
+}
+h3{
+	color: black;
+	background-color: lavender;
+	border-style: solid;
+	border-radius: 20;
+	padding-bottom: 50;
+	margin: 20;
+}
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
