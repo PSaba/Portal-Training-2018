@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
-<link rel="stylesheet" href = "cms.css">
-<nav>
-	<ul> 
-	  <a href="cms.html">Home</a>
-	  <a href="userEdit.html">Edit Login </a>
-	  <a href="adminDash.html">Dashboard</a>
-	</ul>
-</nav>
+<html lang="en">
+
 <head>
+	<meta charset="utf-8"/>
 	<title>Admin Dashboard</title>
+	<link rel="stylesheet" href = "cms.css">
 </head>
-<header>
-	<h1>Dashboard</h1>
-</header>
+
 <body>
+	<nav>
+		<ul> 
+		  <li><a href="cms.html">Home</a></li>
+		  <li><a href="userEdit.html">Edit Login </a></li>
+		  <li><a href="adminDash.html">Dashboard</a></li>
+		</ul>
+	</nav>
+	<header>
+		<h1>Dashboard</h1>
+	</header>
 	<h2> Table of Pages <input type="button" value="Add Page" /></h2>
-	<table width="100%">
+	<table>
 		<tr>
 			<th>Title</th>
 			<th>Updated</th>
@@ -48,12 +51,6 @@
 				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
 				<input type="button" value="Visible/Not Visible" />
 			</th>
-		</tr>
-		<tr>
-			
-		</tr>
-		<tr>
-			
 		</tr>
 	</table>
 

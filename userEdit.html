@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html>
-<link rel="stylesheet" href = "cms.css">
-<nav>
-	<ul> 
-	  <a href="cms.html">Home</a>
-	  <a href="userEdit.html">Edit Login </a>
-	  <a href="adminDash.html">Dashboard</a>
-	</ul>
-</nav>
+<html lang="en">
+
 <head>
+	<meta charset="utf-8"/>
 	<title>User Account</title>
+	<link rel="stylesheet" href = "cms.css">
 </head>
-<header>
-	<h1>Log In to User Account</h1>
-</header>
+
 <body>
+	<nav>
+		<ul> 
+		  <li><a href="cms.html">Home</a></li>
+		  <li><a href="userEdit.html">Edit Login </a></li>
+		  <li><a href="adminDash.html">Dashboard</a></li>
+		</ul>
+	</nav>
+	<header>
+		<h1>Log In to User Account</h1>
+	</header>
 	<h2> Edit User Account </h2>
 	<form class="formy">
-	 	<h3>Email: <input type="text" name="email"> <br>
-		Password: <input type="text" name="password"> <br>
+	 	<h3>Email: <input type="email" name="email"> <br>
+		Password: <input type="password" name="password"> <br>
 		<input type="button" onclick="window.location.href = 'adminDash.html'" value="Save" /></h3>
 	</form>
 </body>
