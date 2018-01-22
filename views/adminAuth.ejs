@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>Admin Authorization</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<!--<div class="sidenav">
+  <a href="#">Item1</a>
+  <a href="#">Item2</a>
+  <a href="#">Item3</a>
+  <a href="#">Item4</a>
+</div>-->
+
+<body>
+	<%- include genNav %>
+<header>
+	<h1>Admin Authorization</h1>
+</header>
+	<h2> Registration </h2>
+	<form class="formy" method="POST" action = "/auth/register">
+	 	<h3>Email: <input type="email" name="email"> <br>
+		Pass: <input type="password" name="password"><br>
+		<input type="Submit" value="Submit"></h3>
+	</form>
+	<h2> Login </h2>
+	<form class="formy" method = "POST" action="/auth/checkRegister">
+		<% if(typeof authError !== 'undefined'){ %>
+			<div class = 'auth-error-container'>
+				<%= authError %>
+			</div>
+		<% } %>
+		<h3>Email: <input type="email" name="email"><br>
+		Password: <input type="password" name="password"><br>
+		<input type="Submit" value="Submit"></h3>
+	</form>
+	<footer>
+		<h2>Footer</h2>
+	</footer>
+</body>
+
+</html>
