@@ -33,17 +33,14 @@ router.post('/auth/register', function(req, res){
 });
 
 router.post('/auth/checkRegister', function(req, res){
-  User.findOne({ email: req.body.email }, function(err, user) {
+  userModel.findOne({ email: req.body.email, password: req.body.password}, function(err, user) {
     if (!user) {
-      res.render('/auth/getregister', { error: 'Invalid email or password.' });
+      res.render('adminAuth', { error: 'Invalid email or password.' });
     } else {
-      if (req.body.password === user.password) {
-        document.cookie = "username=" + req.body.email;
+        req.user = user;
+        delete req.user.password; // delete the password from the session
         req.session.user = user;
         res.redirect('/admin');
-      } else {
-        res.render('/auth/getregister', { error: 'Invalid email or password.' });
-      }
     }
   });
 });
@@ -65,7 +62,7 @@ router.get('/test', function(req, res){
 })
 
 router.get('/:page', function(req, res){
-  pageModel.findOne({url: req.params.page.trim()},
+  pageModel.findOne({title: req.params.page.trim()},
   function(err, page){
     if(err) return res.send(err);
     if(page){

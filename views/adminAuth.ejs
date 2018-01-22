@@ -26,9 +26,9 @@
 	</form>
 	<h2> Login </h2>
 	<form class="formy" method = "POST" action="/auth/checkRegister">
-		<% if(typeof authError !== 'undefined'){ %>
-			<div class = 'auth-error-container'>
-				<%= authError %>
+		<% if(typeof error !== 'undefined'){ %>
+			<div>
+				<h2><%= error %></h2>
 			</div>
 		<% } %>
 		<h3>Email: <input type="email" name="email"><br>
