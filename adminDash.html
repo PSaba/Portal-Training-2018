@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" href = "cms.css">
+</head>
+
+<body>
+	<nav>
+		<ul> 
+		  <li><a href="cms.html">Home</a></li>
+		  <li><a href="userEdit.html">Edit Login </a></li>
+		  <li><a href="adminDash.html">Dashboard</a></li>
+		</ul>
+	</nav>
+	<header>
+		<h1>Dashboard</h1>
+	</header>
+	<h2> Table of Pages <input type="button" value="Add Page" /></h2>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Updated</th>
+			<th>Options</th>
+		</tr>
+		<tr>
+			<th> <a href="cms.html">Home</a></th>
+			<th> 23:04:02 1/4/19 </th>
+			<th>
+				<input type="button" value="Remove" />
+				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
+				<input type="button" value="Visible/Not Visible" />
+			</th>
+		</tr>
+		<tr>
+			<th> <a href="cms.html">Other 1</a></th>
+			<th> 23:04:02 1/4/19 </th>
+			<th>
+				<input type="button" value="Remove" />
+				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
+				<input type="button" value="Visible/Not Visible" />
+			</th>
+		</tr>
+		<tr>
+			<th> <a href="cms.html">Other 2</a></th>
+			<th> 23:04:02 1/4/19 </th>
+			<th>
+				<input type="button" value="Remove" />
+				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
+				<input type="button" value="Visible/Not Visible" />
+			</th>
+		</tr>
+	</table>
+
+</body>
+</html>
