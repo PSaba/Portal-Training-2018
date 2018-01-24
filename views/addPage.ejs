@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>New Page</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+	<%- include adminnav %>
+    <header><h1>New Page</h1></header>
+    <form method = "POST" action="/auth/newPage">
+        <h2><input placeholder = "Title of the Page" type="text" name="title"> </h2>
+
+        <p class = "contentEdit">
+            Edit Text<br><textarea rows = "50" cols = "100" type="text" name="content">Temp Content</textarea>
+        <!--	<br>Upload Media (.png, .svg, .mp3, .mp4) 
+            <input type="button" value="Upload"/> -->
+        </p>
+        <br><h2>URL<input type="text" name="url" placeholder="/something/somethingelse"> </h2>
+        <br><h2>Template 
+            <input type="button" value="Descrip1"/>
+            <input type="button" value="Descrip2"/>
+            <input type="button" value="Descrip3"/>
+            <input type="button" value="Descrip4"/> </h2>
+        <br><input type="Submit" value="Submit"/>
+    </form>
+	
+</body>
+</html>

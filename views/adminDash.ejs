@@ -18,23 +18,38 @@
 	<header>
 		<h1>Dashboard</h1>
 	</header>
-	<h2> Table of Pages <input type="button" value="Add Page" method="GET" action = "/auth/newpage" /></h2>
+	<h2> Table of Pages </h2>
+	<h1>
+			<form method = "POST" action="/admin/addpage">
+				Add Page
+				<input type="Submit" value="Submit">
+			</form>
+			<form method = "POST" action="/admin/editstuff">
+				Edit Information
+				<input type="Submit" value="Submit">
+			</form>
+	</h1>
+	<%= pages %>
 	<table>
 		<tr>
+			<th>ID</th>
 			<th>Title</th>
 			<th>Updated</th>
 			<th>Options</th>
+	<% pages.forEach(function(page){ %>
 		</tr>
+			<tr>
+				<th><%=page._id%></th>
+				<th> <a href = "<%=page.url%>"> <%=page.title%></th>
+				<th> 23:04:02 1/4/19 </th>
+				<th>
+					<input type="button" value="Remove" formaction="/admin/deletingpage" id=<%=page._id%>/>
+					<input type="submit" value="Edit" formaction="/admin/editpage" id=<%=page._id%>/>
+					<input type="button" value="Visible/Not Visible" formaction="/admin/toggleVisibility" id=<%=page._id%>/>
+				</th>
+			</tr>
 		<tr>
-			<th> <a href="cms.html">Home</a></th>
-			<th> 23:04:02 1/4/19 </th>
-			<th>
-				<input type="button" value="Remove" />
-				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
-				<input type="button" value="Visible/Not Visible" />
-			</th>
-		</tr>
-		<tr>
+		<% });%>
 			<th> <a href="cms.html">Other 1</a></th>
 			<th> 23:04:02 1/4/19 </th>
 			<th>

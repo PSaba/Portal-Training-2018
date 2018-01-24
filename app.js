@@ -28,9 +28,10 @@ app.use(session({
 app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     userModel.findOne({ email: req.session.user.email }, function(err, user) {
-      if (user) {
+      if (user) { //USER VS USER SESSION!!!!!
+        req.user = user.toObject();
         req.session.user = user;
-       // delete req.user.password; // delete the password from the session
+        delete req.user.password; // delete the password from the session
         req.session.user = user;  //refresh the session value
         res.locals.user = user;
       }
@@ -64,8 +65,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(function(req, res, next){
+  console.log("My first middleware");
+  req.thiman = "Hahaha";
+  next();
+});
+
+
+function requireLogin (req, res, next) {
+  if (!req.session.user) {
+    res.redirect('/auth/getregister');
+  } else {
+    next();
+  }
+}; 
+
 app.use('/users', users);
-app.use('/admin', admin);
+app.use('/admin', requireLogin, admin);
 app.use('/', index);
 
 mongoose.connect('mongodb://localhost/jan2018');

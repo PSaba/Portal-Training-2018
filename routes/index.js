@@ -10,15 +10,18 @@ router.get('/', function(req, res, next) {
   res.render('cms', { title: 'Express', content: 'Something' });
 });
 
-router.get('/auth/newPage', function(req, res){
+router.post('/auth/newPage', function(req, res){
   var newPage = new pageModel({
-    title: 'Temp',
-    content: 'tbd'
+    title: req.body.title,
+    url: req.body.url,
+    content: req.body.content,
+    user: req.user,
   });
    newPage.save(function(err, page){
     if(err) return console.error(err);
     console.log(page.title);
   });
+  res.redirect('/admin');
 });
 
 router.post('/auth/register', function(req, res){
@@ -62,10 +65,10 @@ router.get('/test', function(req, res){
 })
 
 router.get('/:page', function(req, res){
-  pageModel.findOne({title: req.params.page.trim()},
+  pageModel.findOne({url: req.params.page.trim()},
   function(err, page){
     if(err) return res.send(err);
-    if(page){
+    if(page && page.visible){
       res.render('cms', {
         title: page.title,
         content: page.content
