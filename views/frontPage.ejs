@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title name= title></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<%- include genNav %>
+<header>
+    <h1>All Pages!!</h1>
+    
+</header>
+<table>
+		<tr>
+            <th>Title</th>
+            <th>Content</th>
+			<th>User</th>
+	<% pages.forEach(function(page){ %>
+		</tr>
+			<tr>
+                <th> <a href = "<%=page.url%>"> <%=page.title%></th>
+                <th><span style="display:block;text-overflow: ellipsis;width: 200px;overflow: hidden; white-space: nowrap;">
+                        <%=page.content%>
+                        </span></th>
+                <th><%=page.user.email%></th>
+			</tr>
+		<% });%>
+	</table>
+</body>
+
+</html>
+

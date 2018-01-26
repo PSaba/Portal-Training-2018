@@ -24,12 +24,11 @@
 				Add Page
 				<input type="Submit" value="Submit">
 			</form>
-			<form method = "POST" action="/admin/editstuff">
+			<form method = "GET" action="/admin/editstuff">
 				Edit Information
 				<input type="Submit" value="Submit">
 			</form>
 	</h1>
-	<%= pages %>
 	<table>
 		<tr>
 			<th>ID</th>
@@ -43,30 +42,12 @@
 				<th> <a href = "<%=page.url%>"> <%=page.title%></th>
 				<th> 23:04:02 1/4/19 </th>
 				<th>
-					<input type="button" value="Remove" formaction="/admin/deletingpage" id=<%=page._id%>/>
-					<input type="submit" value="Edit" formaction="/admin/editpage" id=<%=page._id%>/>
-					<input type="button" value="Visible/Not Visible" formaction="/admin/toggleVisibility" id=<%=page._id%>/>
+					<form method = "POST" action="/admin/deletingpage/<%=page._id%>"><input type="submit" value="Remove"/></form>
+					<form method = "POST" action="/admin/editpage/<%=page._id%>?"> <input type="submit" value="Edit"/></form>
+					<form method = "GET" action="/admin/toggleVisibility/<%=page._id%>"> <input type="submit" value="Visible/Not Visible"/></form>
 				</th>
 			</tr>
-		<tr>
 		<% });%>
-			<th> <a href="cms.html">Other 1</a></th>
-			<th> 23:04:02 1/4/19 </th>
-			<th>
-				<input type="button" value="Remove" />
-				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
-				<input type="button" value="Visible/Not Visible" />
-			</th>
-		</tr>
-		<tr>
-			<th> <a href="cms.html">Other 2</a></th>
-			<th> 23:04:02 1/4/19 </th>
-			<th>
-				<input type="button" value="Remove" />
-				<input type="button" value="Edit" onclick="window.location.href = 'editPage.html'"/>
-				<input type="button" value="Visible/Not Visible" />
-			</th>
-		</tr>
 	</table>
 
 </body>

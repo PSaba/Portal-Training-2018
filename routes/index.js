@@ -7,7 +7,9 @@ var pageModel = require('../models/page');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('cms', { title: 'Express', content: 'Something' });
+  pageModel.find( {}, function(err, pages){
+    res.render('frontPage', {"pages": pages});
+   })
 });
 
 router.post('/auth/newPage', function(req, res){
