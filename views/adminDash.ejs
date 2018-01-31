@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+	<!-- Main Quill library -->
+	<script src="//cdn.quilljs.com/1.3.5/quill.js"></script>
+	<script src="//cdn.quilljs.com/1.3.5/quill.min.js"></script>
+
+	<!-- Theme included stylesheets -->
+	<link href="//cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet">
+	<link href="//cdn.quilljs.com/1.3.5/quill.bubble.css" rel="stylesheet">
+
+	<!-- Core build with no theme, formatting, non-essential modules -->
+	<link href="//cdn.quilljs.com/1.3.5/quill.core.css" rel="stylesheet">
+	<script src="//cdn.quilljs.com/1.3.5/quill.core.js"></script>
 	<meta charset="utf-8"/>
 	<title>Admin Dashboard</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
@@ -41,7 +52,7 @@
 				<th> 23:04:02 1/4/19 </th>
 				<th>
 					<form method = "POST" action="/admin/deletingpage/<%=page._id%>"><input type="submit" value="Remove"/></form>
-					<input type="button" value="Remove" class="button-delete" data-page-id="<%=page._id%>"/>
+				<!--	<input type="button" value="Remove" class="button-delete" data-page-id="<%=page._id%>"/> -->
 					<form method = "POST" action="/admin/editpage/<%=page._id%>?"> <input type="submit" value="Edit"/></form>
 					<%if (page.visible){%>
 						<input type="button" value="Visible/NotVisible" class="btn-vis" data-page-id="<%=page._id%>"/>
@@ -53,7 +64,6 @@
 			</tr>
 		<% });%>
 	</table>
-</body>
 <div class="modal">
 <div id="addingpage" class="some-modal">
 	<h1>Creating New Page</h1> <input type="button" value="Cancel" onclick="openform()"/>
@@ -65,6 +75,7 @@
         <!--	<br>Upload Media (.png, .svg, .mp3, .mp4) 
             <input type="button" value="Upload"/> -->
 		</p>
+		<div id="editor">Temp Content</div>	
 		<h2>URL<input type="text" name="url" placeholder="/something/somethingelse"> </h2>
 		<h2>Template 
             <input type="button" value="Descrip1"/>
@@ -77,51 +88,51 @@
 	<div class="modal-background">
 </div>
 </div>
-</html>		
 <script>
-			function openform(){
-				$(".modal").toggle();
-			}
-			$(function(){
-				openform();
-				$(".modal").on('click', ".modal-background", function(event){
-					openform();
-				})
-				$('.btn-vis').on('click', function(e){
-					var button = $(this);
-					var pageId = $(this).attr('data-page-id');
-					$.ajax({
-						Method: 'GET',
-						url: '/admin/toggleVisibility/'+ pageId,
-						data: pageId
-					}).done(function(response){
-						button.toggleClass("button-visible");
-					});
-				});	
+	function openform(){
+		$(".modal").toggle();
+	}
+	$(function(){
+		openform();
+		$(".modal").on('click', ".modal-background", function(event){
+			openform();
+		})
+		$('.btn-vis').on('click', function(e){
+			var button = $(this);
+			var pageId = $(this).attr('data-page-id');
+			$.ajax({
+				Method: 'GET',
+				url: '/admin/toggleVisibility/'+ pageId,
+				data: pageId
+			}).done(function(response){
+				button.toggleClass("button-visible");
+			});
+		});	
 
-				$('.button-delete').on('click', function(e){
-					var button = $(this);
-					var pageId = $(this).attr('data-page-id');
-					$.ajax({
-						Method: 'Delete',
-						url: `admin/deletingpage/` + pageId
-					}).done(function(response){
-						Button.parent().parent().remove();
-					});
-				});	
+		$('.button-delete').on('click', function(e){
+			var button = $(this);
+			var pageId = $(this).attr('data-page-id');
+			$.ajax({
+				Method: 'Delete',
+				url: `admin/deletingpage/` + pageId
+			}).done(function(response){
+				Button.parent().parent().remove();
+			});
+		});	
 
-				var form1 = $('#addingpage');
-				$(form1).submit(function(Event){
-					var formDate = $(this).serialize();
-					var pageId = $(this);
-					$.ajax({
-					Method: 'POST',
-					url: '/auth/newpage',
-					data: FormData
-					})
-					.done(function(response){
-
-					});
-				})
+		var form1 = $('#addingpage');
+		$(form1).submit(function(Event){
+			var formDate = $(this).serialize();
+			var pageId = $(this);
+			$.ajax({
+				Method: 'POST',
+				url: '/auth/newpage',
+				data: FormData
 			})
-		</script>
+		})
+	})
+	var quill = new Quill('#editor', {
+	});
+</script>
+</body>
+</html>		
