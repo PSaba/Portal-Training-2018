@@ -21,17 +21,14 @@ router.get('/editstuff', function(req, res){
     res.render('editInformation');
 });
 
-router.post('/deletingpage/:page', function(req, res){
-    pageModel.findOneAndRemove({"_id": req.params.page.trim()}, function(err, page){
+router.delete('/deletingpage/:page', function(req, res){
+    pageModel.findOneAndRemove({"_id": req.params.page}, function(err, page){
     })
-    res.redirect('/admin');
+    res.end();
 });
 
 router.get('/toggleVisibility/:page', function(req, res){
     pageModel.findOne({"_id": req.params.page}, function(err, page){
-        console.log('hi');
-        console.log(page.visible == true);
-        console.log(req.params.page);
         if(page.visible == true){
             pageModel.update(
             {"_id": req.params.page},

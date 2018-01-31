@@ -5,6 +5,7 @@
 	<meta charset="utf-8"/>
 	<title>Admin Dashboard</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -20,14 +21,11 @@
 	</header>
 	<h2> Table of Pages </h2>
 	<h1>
-			<form method = "POST" action="/admin/addpage">
-				Add Page
-				<input type="Submit" value="Submit">
-			</form>
 			<form method = "GET" action="/admin/editstuff">
 				Edit Information
 				<input type="Submit" value="Submit">
 			</form>
+			Add Page <input type="button" value="Add Page" onclick="openform()"id="openAdder" />
 	</h1>
 	<table>
 		<tr>
@@ -43,12 +41,87 @@
 				<th> 23:04:02 1/4/19 </th>
 				<th>
 					<form method = "POST" action="/admin/deletingpage/<%=page._id%>"><input type="submit" value="Remove"/></form>
+					<input type="button" value="Remove" class="button-delete" data-page-id="<%=page._id%>"/>
 					<form method = "POST" action="/admin/editpage/<%=page._id%>?"> <input type="submit" value="Edit"/></form>
-					<form method = "GET" action="/admin/toggleVisibility/<%=page._id%>"> <input type="submit" value="Visible/Not Visible"/></form>
+					<%if (page.visible){%>
+						<input type="button" value="Visible/NotVisible" class="btn-vis" data-page-id="<%=page._id%>"/>
+					<%} else {%>
+						<input type="button" value="Visible/NotVisible" class="btn-vis button-visible" data-page-id="<%=page._id%>"/>
+					<% };%>
+				
 				</th>
 			</tr>
 		<% });%>
 	</table>
-
 </body>
-</html>
+<div class="modal">
+<div id="addingpage" class="some-modal">
+	<h1>Creating New Page</h1> <input type="button" value="Cancel" onclick="openform()"/>
+    <form method = "POST" action="/auth/newPage">
+        <h2><input placeholder = "Title of the Page" type="text" name="title"> </h2>
+
+        <p class = "contentEdit">
+            Edit Text<br><textarea class="contain-full" rows = "3" type="text" name="content">Temp Content</textarea>
+        <!--	<br>Upload Media (.png, .svg, .mp3, .mp4) 
+            <input type="button" value="Upload"/> -->
+		</p>
+		<h2>URL<input type="text" name="url" placeholder="/something/somethingelse"> </h2>
+		<h2>Template 
+            <input type="button" value="Descrip1"/>
+            <input type="button" value="Descrip2"/>
+            <input type="button" value="Descrip3"/>
+            <input type="button" value="Descrip4"/> </h2>
+        <br><input type="Submit" value="Submit"/>
+	</form>
+</div>
+	<div class="modal-background">
+</div>
+</div>
+</html>		
+<script>
+			function openform(){
+				$(".modal").toggle();
+			}
+			$(function(){
+				openform();
+				$(".modal").on('click', ".modal-background", function(event){
+					openform();
+				})
+				$('.btn-vis').on('click', function(e){
+					var button = $(this);
+					var pageId = $(this).attr('data-page-id');
+					$.ajax({
+						Method: 'GET',
+						url: '/admin/toggleVisibility/'+ pageId,
+						data: pageId
+					}).done(function(response){
+						button.toggleClass("button-visible");
+					});
+				});	
+
+				$('.button-delete').on('click', function(e){
+					var button = $(this);
+					var pageId = $(this).attr('data-page-id');
+					$.ajax({
+						Method: 'Delete',
+						url: `admin/deletingpage/` + pageId
+					}).done(function(response){
+						Button.parent().parent().remove();
+					});
+				});	
+
+				var form1 = $('#addingpage');
+				$(form1).submit(function(Event){
+					var formDate = $(this).serialize();
+					var pageId = $(this);
+					$.ajax({
+					Method: 'POST',
+					url: '/auth/newpage',
+					data: FormData
+					})
+					.done(function(response){
+
+					});
+				})
+			})
+		</script>
