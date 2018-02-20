@@ -2,17 +2,9 @@
 <html lang="en">
 
 <head>
-	<!-- Main Quill library -->
-	<script src="//cdn.quilljs.com/1.3.5/quill.js"></script>
-	<script src="//cdn.quilljs.com/1.3.5/quill.min.js"></script>
-
-	<!-- Theme included stylesheets -->
-	<link href="//cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet">
-	<link href="//cdn.quilljs.com/1.3.5/quill.bubble.css" rel="stylesheet">
-
-	<!-- Core build with no theme, formatting, non-essential modules -->
-	<link href="//cdn.quilljs.com/1.3.5/quill.core.css" rel="stylesheet">
-	<script src="//cdn.quilljs.com/1.3.5/quill.core.js"></script>
+		<script src="assets/content-tools.min.js"></script>
+		<script src="assets/editor.js"></script>
+		
 	<meta charset="utf-8"/>
 	<title>Admin Dashboard</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
@@ -71,17 +63,11 @@
         <h2><input placeholder = "Title of the Page" type="text" name="title"> </h2>
 
         <p class = "contentEdit">
-            Edit Text<br><textarea class="contain-full" rows = "3" type="text" name="content">Temp Content</textarea>
+            <br><textarea class="contain-full" rows = "3" type="text" name="content">Temp Content</textarea>
         <!--	<br>Upload Media (.png, .svg, .mp3, .mp4) 
             <input type="button" value="Upload"/> -->
 		</p>
-		<div id="editor">Temp Content</div>	
 		<h2>URL<input type="text" name="url" placeholder="/something/somethingelse"> </h2>
-		<h2>Template 
-            <input type="button" value="Descrip1"/>
-            <input type="button" value="Descrip2"/>
-            <input type="button" value="Descrip3"/>
-            <input type="button" value="Descrip4"/> </h2>
         <br><input type="Submit" value="Submit"/>
 	</form>
 </div>

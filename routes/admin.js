@@ -16,6 +16,29 @@ router.post('/addpage', function(req, res){
     res.render('addPage'); 
 });
 
+router.post('/savepage/:page/', function(req, res){
+    console.log(req.body.content1);
+    console.log(req.params.page);
+    // Find the product we're updating
+   // product_id = ObjectId(req.form['product'])
+  //  product = pageModel.find_one({'_id': product_id})
+    //Convert the regions provided to a dictionary
+  // regions = json.loads(req.form['regions'])
+
+
+    //Save the new description for the product
+    pageModel.findOneAndUpdate(
+        {'_id': req.params.page},
+        {
+            "$set": {
+                "content": req.body.content1
+        } },
+        function(err, page){
+            console.log('hi');
+            console.log(page);
+        }
+    )
+});
 
 router.get('/editstuff', function(req, res){
     res.render('editInformation');

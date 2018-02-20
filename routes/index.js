@@ -66,21 +66,53 @@ router.get('/test', function(req, res){
   res.end();
 })
 
+router.post('/save-page', function(req, res){
+  console.log('getting');
+  console.log(req);
+  // Find the product we're updating
+  product_id = ObjectId(request.form['product'])
+  product = pageModel.find_one({'_id': product_id})
+  //Convert the regions provided to a dictionary
+  regions = json.loads(request.form['regions'])
+
+  //Save the new description for the product
+  pageModel.findOneAndUpdate(
+      {'_id': product_id},
+      {
+          "$set": {
+              "content": regions
+      }
+  })
+});
+
 router.get('/:page', function(req, res){
-  pageModel.findOne({url: req.params.page.trim()},
+  pageModel.find( {}, function(err, pages){
+    pageModel.findOne({url: req.params.page.trim()},
   function(err, page){
     if(err) return res.send(err);
     if(page && page.visible){
-      res.render('cms', {
-        title: page.title,
-        content: page.content
-      });
+      var seeUpdates;
+      if(req.user){
+        seeUpdates = (pageModel.user == req.user);
+      } else {seeUpdates = false;}
+       
+        console.log(page._id);
+        res.render('cms', {
+          title: page.title,
+          content: page.content,
+          id: page._id,
+          seeAll: seeUpdates,
+          page: pages,
+    //      user: req.session.user._id
+        });
     } else {
       res.status(404).send('404 - Not found yo');
     }
-    res.render();
+   // res.render();
   }
  );
+   })
+
 })
 
 module.exports = router;

@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8"/>
-	<meta name="product" content="<%= id %>">
-	<title name= title></title>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
-	<link rel="stylesheet" type="text/css" href="/assets/content-tools.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<title><%=title %></title>
-</head>
-<body>
-    <%- include genNav %>
-    <ul class="navigation">
-        <%page.forEach(function(page){ %>
-            <li class="navigation" href='/<%=page.url%>'><%=page.title%></li>
-        <% }); %>
-    </ul>
-<header>
-	<h1><%=title %></h1>
-</header>
-<% if(seeAll) { %>
-<main class="product" id="content1" data-editable data-name="content1">
-	<p><%- content %></p>
-</main>
-<% } else { %>
-	<p><%-content %></p>
-<%}; %>
-<script src="/assets/content-tools.min.js"></script>
-<script>
-	window.addEventListener('load', function() {
+window.addEventListener('load', function() {
     var editor;
     editor = ContentTools.EditorApp.get();
     editor.init('*[data-editable]', 'data-name');
@@ -38,9 +8,8 @@
         // Check if this was a passive save
         passive = ev.detail().passive;
         // Check to see if there are any changes to save
-		regions = ev.detail().regions;
-		console.log('doing stuff');
-        console.log(regions);
+        regions = ev.detail().regions;
+        console.log(JSON.stringify(regions));
         if (Object.keys(regions).length == 0) {
             return;
         }
@@ -80,19 +49,15 @@
         // console.log(payload);
         // //xhr.send({'regions': JSON.stringify(regions)})
         // xhr.send(payload);
-
   $.ajax({
-	method: 'POST',
-    url: '/admin/savepage/<%=id%>/',
-	data: regions,
+    Method: 'POST',
+    type: 'POST',
+    url: '/admin/savepage/<%=id>/',
+    data: JSON.stringify(regions)
 }).done(function(){
     console.log('hello');
+    console.log(data);
 })
 
-});
     });
-</script>
-</body>
-
-</html>
-
+});
