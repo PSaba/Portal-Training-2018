@@ -20,10 +20,18 @@ router.post('/auth/newPage', function(req, res){
     user: req.user,
   });
    newPage.save(function(err, page){
-    if(err) return console.error(err);
+    if(err) {
+      return console.error(err);
+      pageModel.find( {"user._id" : req.user._id}, function(err, pages){
+        res.render('adminDash', {"pages": pages, "error": "Messed up adding page"});
+       })
+    }
     console.log(page.title);
+
   });
-  res.redirect('/admin');
+  pageModel.find( {"user._id" : req.user._id}, function(err, pages){
+    res.render('adminDash', {"pages": pages});
+   })
 });
 
 router.post('/auth/register', function(req, res){
@@ -49,6 +57,7 @@ router.post('/auth/checkRegister', function(req, res){
     }
   });
 });
+
 
 router.get('/auth/getregister', function(req, res){
   res.render('adminAuth');
@@ -93,7 +102,7 @@ router.get('/:page', function(req, res){
     if(page && page.visible){
       var seeUpdates;
       if(req.user){
-        seeUpdates = (pageModel.user == req.user);
+        seeUpdates = (page.user.email == req.user.email);
       } else {seeUpdates = false;}
        
         console.log(page._id);

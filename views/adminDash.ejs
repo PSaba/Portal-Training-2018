@@ -12,16 +12,22 @@
 </head>
 
 <body>
-	<nav>
-		<ul> 
-		  <li><a class="navigation" href="cms.html">Home</a></li>
-		  <li><a class="navigation" href="userEdit.html">Edit Login </a></li>
-		  <li><a class="navigation" href="adminDash.html">Dashboard</a></li>
+	<!-- <nav>
+		<ul class="navigation"> 
+		  <li class="navigation"><a class="navigation" href="cms.html">Home</a></li>
+		  <li class="navigation"><a class="navigation" href="userEdit.html">Edit Login </a></li>
+		  <li class="navigation"><a class="navigation" href="adminDash.html">Dashboard</a></li>
 		</ul>
-	</nav>
+	</nav> -->
+	<%- include adminnav %>
 	<header>
 		<h1>Dashboard</h1>
 	</header>
+	<% if(typeof error !== 'undefined'){ %>
+		<div>
+			<h2><%= error %></h2>
+		</div>
+	<% } %>
 	<h2> Table of Pages </h2>
 	<h1>
 			<form method = "GET" action="/admin/editstuff">
@@ -30,22 +36,20 @@
 			</form>
 			Add Page <input type="button" value="Add Page" onclick="openform()"id="openAdder" />
 	</h1>
-	<table>
+	<table name="postsallofthem">
 		<tr>
 			<th>ID</th>
 			<th>Title</th>
-			<th>Updated</th>
 			<th>Options</th>
 	<% pages.forEach(function(page){ %>
 		</tr>
 			<tr>
 				<th><%=page._id%></th>
 				<th> <a href = "<%=page.url%>"> <%=page.title%></th>
-				<th> 23:04:02 1/4/19 </th>
 				<th>
 					<form method = "POST" action="/admin/deletingpage/<%=page._id%>"><input type="submit" value="Remove"/></form>
 				<!--	<input type="button" value="Remove" class="button-delete" data-page-id="<%=page._id%>"/> -->
-					<form method = "POST" action="/admin/editpage/<%=page._id%>?"> <input type="submit" value="Edit"/></form>
+					<form method = "GET" action="/<%=page.url%>?"> <input type="submit" value="Edit"/></form>
 					<%if (page.visible){%>
 						<input type="button" value="Visible/NotVisible" class="btn-vis" data-page-id="<%=page._id%>"/>
 					<%} else {%>
@@ -68,7 +72,7 @@
             <input type="button" value="Upload"/> -->
 		</p>
 		<h2>URL<input type="text" name="url" placeholder="/something/somethingelse"> </h2>
-        <br><input type="Submit" value="Submit"/>
+        <br><input type="Submit" class="add-page" value="Submit"/>
 	</form>
 </div>
 	<div class="modal-background">
@@ -102,10 +106,9 @@
 				Method: 'Delete',
 				url: `admin/deletingpage/` + pageId
 			}).done(function(response){
-				Button.parent().parent().remove();
+				button.closest('tr').remove();
 			});
 		});	
-
 		var form1 = $('#addingpage');
 		$(form1).submit(function(Event){
 			var formDate = $(this).serialize();

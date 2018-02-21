@@ -13,7 +13,8 @@
     <%- include genNav %>
     <ul class="navigation">
         <%page.forEach(function(page){ %>
-            <li class="navigation" href='/<%=page.url%>'><%=page.title%></li>
+        <!--    <li class="navigation" method="GET" action="/<%=page.url%>"><%=page.title%></li> -->
+            <li class="navigation"><a class="navigation" href="/<%=page.url%>"><%=page.title%></a></li>
         <% }); %>
     </ul>
 <header>

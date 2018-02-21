@@ -44,10 +44,10 @@ router.get('/editstuff', function(req, res){
     res.render('editInformation');
 });
 
-router.delete('/deletingpage/:page', function(req, res){
+router.post('/deletingpage/:page', function(req, res){
     pageModel.findOneAndRemove({"_id": req.params.page}, function(err, page){
     })
-    res.end();
+    res.redirect('/admin');
 });
 
 router.get('/toggleVisibility/:page', function(req, res){
